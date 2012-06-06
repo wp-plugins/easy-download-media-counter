@@ -1,7 +1,7 @@
 === Easy Download Media Counter ===
 Author URI: http://remicorson.com
 Author: Rémi Corson
-Contributors: Rémi Corson
+Contributors: corsonr
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UAQZDW8V6HJUL
 Tags: media, download, counter, library, upload, files, management, administration, count, shortcodes
 Requires at least 3.0
