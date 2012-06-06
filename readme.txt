@@ -14,6 +14,8 @@ This plugin allows easy media downloads count using shortcodes
 
 If you need to know how many times a file is downloaded by your visitors then this plugin is for you! Just insert a simple shortcode and that's it! You can also a simple parameter to any download link and the count will be done too!
 
+[Developer Website](http://remicorson.com) - [Dedicated Plugin Page](http://remicorson.com/easy-download-media-counter-free/)
+
 == Installation ==
 
 1. Upload the entire 'easy-download-media-counter' folder to the '/wp-content/plugins/' directory
