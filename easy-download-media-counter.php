@@ -1,11 +1,12 @@
 <?php
 /*
 Plugin Name: Easy Download Media Counter
-Plugin URL: http://remicorson.com
+Plugin URL: http://remicorson.com/easy-download-media-counter-free/
 Description: This plugin allows you to easily count downloads for a wordpress media and display it
-Version: 1.0
+Version: 1.1
 Author: Rémi Corson
 Author URI: http://remicorson.com
+Conytributors: corsonr
 */
 
 /* ----------------------------------------
@@ -143,6 +144,43 @@ if( !is_admin() ) {
 		
 	}
 }
+
+/* ------------------------------------------------------------------*/
+/* Media Library Add Count Column */
+/* ------------------------------------------------------------------*/
+
+function edmc_add_count_column($posts_columns) {
+	  
+	// Add a new column
+	$posts_columns['downloads'] = _x('Downloads', 'downloads_column');
+ 
+	return $posts_columns;
+}
+add_filter('manage_media_columns', 'edmc_add_count_column');
+
+/* ------------------------------------------------------------------*/
+/* Media Library Populate Count Column */
+/* ------------------------------------------------------------------*/
+
+function edmc_populate_count_column($column_name, $id) {
+
+	$downloads = get_post_meta($id, '_edmc-download-count', true);
+	
+	switch($column_name) {
+		case 'downloads':
+			if ( $downloads > 0 ) {
+				echo $downloads;
+			} else {
+				_e('Not downloaded yet');
+			}
+			break;
+		default:
+			break;
+	}
+ 
+}
+add_action('manage_media_custom_column', 'edmc_populate_count_column', 10, 2);
+
 
 /* ------------------------------------------------------------------*/
 /* Uninstall plugin */
