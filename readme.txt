@@ -6,7 +6,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: media, download, counter, library, upload, files, management, administration, count, shortcodes
 Requires at least 3.0
 Tested up to 3.3.1
-Stable tag: 1.1
+Stable tag: 1.2
 
 This plugin allows easy media downloads count using shortcodes
 
