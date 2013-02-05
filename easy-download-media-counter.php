@@ -3,8 +3,8 @@
 Plugin Name: Easy Download Media Counter
 Plugin URL: http://remicorson.com/easy-download-media-counter-free/
 Description: This plugin allows you to easily count downloads for a wordpress media and display it
-Version: 1.1
-Author: Rémi Corson
+Version: 1.2
+Author: Remi Corson
 Author URI: http://remicorson.com
 Conytributors: corsonr
 */
@@ -106,23 +106,24 @@ if( !is_admin() ) {
 		update_post_meta($_GET['edmc'], '_edmc-download-count', $count+1);
 		
 		// Call the full URL to the file
-		$file = wp_get_attachment_url($_GET['edmc']);
+		$file = wp_get_attachment_url( $_GET['edmc'] );
+
 		// Get just the file name
 		$file_name = basename($file);
 		
 		if(isset($file)){
 		    //Getting the path to work with filesize()
-		    $wp_upload_dir = wp_upload_dir(); 
+		    $wp_upload_dir      = wp_upload_dir(); 
 			$current_upload_dir = $wp_upload_dir['path']; 
-			$filepath = $current_upload_dir.'/'.$file_name;
+			$filepath           = $current_upload_dir.'/'.$file_name;
 
 			// Checking MIME type and setting accordingly
 		    switch(strtolower(substr(strrchr($file_name,'.'),1)))
 			  {
 			    case 'pdf': $mime = 'application/pdf'; break;
 			    case 'zip': $mime = 'application/zip'; break;
-			    case 'jpeg':
-			    case 'jpg':
+			    case 'jpeg': $mime = 'image/jpg'; break;
+			    case 'jpg': $mime = 'image/jpg'; break;
 			    case 'png': $mime = 'image/jpg'; break;
 			    default: $mime = 'application/force-download';
 			  }
@@ -134,9 +135,9 @@ if( !is_admin() ) {
 			  header('Content-Type: '.$mime);
 			  header('Content-Disposition: attachment; filename="'.basename($file_name).'"');
 			  header('Content-Transfer-Encoding: binary');
-			  header('Content-Length: '.filesize($filepath));  // provide file size
+			  //header('Content-Length: '.filesize($filepath));  // provide file size
 			  header('Connection: close');
-			  readfile($filepath);    // push it out
+			  readfile( $file );    // push it out
 			  exit();
 		}
 
