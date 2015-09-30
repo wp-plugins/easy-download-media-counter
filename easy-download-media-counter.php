@@ -105,7 +105,7 @@ if( !is_admin() ) {
 		$count = get_post_meta($_GET['edmc'], '_edmc-download-count', true);
 		update_post_meta($_GET['edmc'], '_edmc-download-count', $count+1);
 		
-		// Call the full URL to the file - Fix: we need only file path not url
+		// Fix here: we need only file path not url
 		$file = get_attached_file( $_GET['edmc'] );
 
 		// Get just the file name
