@@ -105,19 +105,14 @@ if( !is_admin() ) {
 		$count = get_post_meta($_GET['edmc'], '_edmc-download-count', true);
 		update_post_meta($_GET['edmc'], '_edmc-download-count', $count+1);
 		
-		// Call the full URL to the file
-		$file = wp_get_attachment_url( $_GET['edmc'] );
+		// Call the full URL to the file - Fix: we need only file path not url
+		$file = get_attached_file( $_GET['edmc'] );
 
 		// Get just the file name
 		$file_name = basename($file);
 		
 		if(isset($file)){
-		    //Getting the path to work with filesize()
-		    $wp_upload_dir      = wp_upload_dir(); 
-			$current_upload_dir = $wp_upload_dir['path']; 
-			$filepath           = $current_upload_dir.'/'.$file_name;
-
-			// Checking MIME type and setting accordingly
+		    // Checking MIME type and setting accordingly
 		    switch(strtolower(substr(strrchr($file_name,'.'),1)))
 			  {
 			    case 'pdf': $mime = 'application/pdf'; break;
@@ -133,9 +128,9 @@ if( !is_admin() ) {
 			  header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 			  header('Cache-Control: private',false);
 			  header('Content-Type: '.$mime);
-			  header('Content-Disposition: attachment; filename="'.basename($file_name).'"');
+			  header('Content-Disposition: attachment; filename="'.$file_name.'"');
 			  header('Content-Transfer-Encoding: binary');
-			  //header('Content-Length: '.filesize($filepath));  // provide file size
+			  header('Content-Length: '.filesize($file));  // provide file size
 			  header('Connection: close');
 			  readfile( $file );    // push it out
 			  exit();
